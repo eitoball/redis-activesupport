@@ -1,4 +1,7 @@
 language: ruby
+before_install:
+  - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
+  - gem install bundler -v '< 2'
 script: 'bundle exec rake'
 rvm:
   - 2.0
@@ -6,6 +9,8 @@ rvm:
   - 2.2
   - 2.3
   - 2.4
+  - 2.5
+  - 2.6
   - ruby-head
   - jruby-head
 services:
@@ -27,6 +32,16 @@ matrix:
       gemfile: gemfiles/activesupport_52.gemfile
     - rvm: 2.1
       gemfile: gemfiles/activesupport_52.gemfile
+    - rvm: 2.0
+      gemfile: gemfiles/activesupport_60.gemfile
+    - rvm: 2.1
+      gemfile: gemfiles/activesupport_60.gemfile
+    - rvm: 2.2
+      gemfile: gemfiles/activesupport_60.gemfile
+    - rvm: 2.3
+      gemfile: gemfiles/activesupport_60.gemfile
+    - rvm: 2.4
+      gemfile: gemfiles/activesupport_60.gemfile
 notifications:
   webhooks: https://www.travisbuddy.com/
   on_success: never
@@ -37,3 +52,4 @@ gemfile:
   - gemfiles/activesupport_50.gemfile
   - gemfiles/activesupport_51.gemfile
   - gemfiles/activesupport_52.gemfile
+  - gemfiles/activesupport_60.gemfile
